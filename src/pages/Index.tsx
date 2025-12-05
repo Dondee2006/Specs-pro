@@ -12,47 +12,44 @@ import {
   GitBranch,
   Download,
   Check,
+  Play,
 } from "lucide-react";
 
 const features = [
   {
-    icon: <FileCode className="h-6 w-6" />,
+    icon: <FileCode className="h-5 w-5" />,
     title: "IDE-Ready Prompts",
     description: "Auto-generate prompts optimized for Cursor, Replit, Lovable, and more.",
   },
   {
-    icon: <Layers className="h-6 w-6" />,
+    icon: <Layers className="h-5 w-5" />,
     title: "Structured Output",
     description: "Clean cards, tables, and diagrams—never walls of text.",
   },
   {
-    icon: <Database className="h-6 w-6" />,
+    icon: <Database className="h-5 w-5" />,
     title: "Data Models",
     description: "Auto-generate entities, attributes, and relationships in JSON format.",
   },
   {
-    icon: <GitBranch className="h-6 w-6" />,
+    icon: <GitBranch className="h-5 w-5" />,
     title: "User Flows",
     description: "Visual flowcharts that map your app's journey.",
   },
   {
-    icon: <Zap className="h-6 w-6" />,
+    icon: <Zap className="h-5 w-5" />,
     title: "MoSCoW Breakdown",
     description: "Prioritize features with Must/Should/Could/Won't categories.",
   },
   {
-    icon: <Download className="h-6 w-6" />,
+    icon: <Download className="h-5 w-5" />,
     title: "Export Anywhere",
     description: "Copy, download Markdown, or get IDE-specific formats.",
   },
 ];
 
-const ideLogos = [
-  { name: "Cursor", color: "text-primary" },
-  { name: "Replit", color: "text-primary" },
-  { name: "Lovable", color: "text-primary" },
-  { name: "Codestral", color: "text-primary" },
-  { name: "Base44", color: "text-primary" },
+const trustedBy = [
+  "Cursor", "Replit", "Lovable", "Codestral", "Base44"
 ];
 
 export default function Index() {
@@ -61,12 +58,7 @@ export default function Index() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-32">
-        {/* Background gradient */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[500px] w-[800px] rounded-full bg-primary/10 blur-[120px]" />
-        </div>
-
+      <section className="hero-section relative overflow-hidden pt-24 pb-16 lg:pt-32 lg:pb-24">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -74,27 +66,36 @@ export default function Index() {
             transition={{ duration: 0.6 }}
             className="mx-auto max-w-4xl text-center"
           >
+            {/* Announcement Badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-2 text-sm backdrop-blur-sm"
+              className="mb-8 inline-flex"
             >
-              <Sparkles className="h-4 w-4 text-primary" />
-              <span>Built for vibecoders</span>
+              <span className="badge-pill">
+                <Sparkles className="h-4 w-4 text-primary" />
+                <span>New: Export to any AI IDE</span>
+              </span>
             </motion.div>
 
+            {/* Main Headline */}
             <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              Turn messy ideas into{" "}
-              <span className="gradient-text">developer-ready PRDs</span>
+              The AI PRD Generator{" "}
+              <br className="hidden sm:block" />
+              that turns your{" "}
+              <span className="gradient-text">vibes</span>
+              <br className="hidden sm:block" />
+              into clear requirements
             </h1>
 
-            <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground lg:text-xl">
-              VibeSpecs Pro transforms your rough concepts into structured,
-              IDE-optimized Product Requirements Documents that AI coding tools
-              can instantly understand.
+            {/* Subheadline */}
+            <p className="mx-auto mb-10 max-w-2xl text-lg text-muted-foreground lg:text-xl">
+              VibeSpecs Pro is <strong className="text-foreground">the #1 AI tool for vibecoders</strong>,
+              who have great ideas and want to build them fast.
             </p>
 
+            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -102,53 +103,63 @@ export default function Index() {
               className="flex flex-col items-center justify-center gap-4 sm:flex-row"
             >
               <Link to="/generate">
-                <Button variant="hero" size="xl" className="gap-2">
-                  Start Building PRDs
-                  <ArrowRight className="h-5 w-5" />
+                <Button size="lg" className="btn-primary h-12 gap-2 rounded-full px-8 text-base">
+                  Try It For Free
+                  <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-              <Button variant="outline" size="lg">
-                View Example
+              <Button variant="outline" size="lg" className="btn-secondary h-12 gap-2 rounded-full px-8 text-base">
+                <Play className="h-4 w-4" />
+                See it in action
               </Button>
-            </motion.div>
-
-            {/* IDE Logos */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-12 flex flex-wrap items-center justify-center gap-6 text-muted-foreground"
-            >
-              <span className="text-sm">Optimized for:</span>
-              {ideLogos.map((ide) => (
-                <span
-                  key={ide.name}
-                  className={`font-medium ${ide.color} transition-colors hover:text-foreground`}
-                >
-                  {ide.name}
-                </span>
-              ))}
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="py-20 lg:py-32">
+      {/* Social Proof Section */}
+      <section className="border-y border-border/50 bg-muted/30 py-8">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col items-center gap-6"
+          >
+            <p className="text-center text-sm text-muted-foreground">
+              Trusted by <span className="font-semibold text-primary">10,000+</span> vibecoders to build{" "}
+              <span className="font-semibold text-primary">50,000+</span> ideas, from side projects to startups
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-8">
+              {trustedBy.map((name) => (
+                <span
+                  key={name}
+                  className="text-sm font-medium text-muted-foreground/70"
+                >
+                  {name}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 lg:py-28">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="mb-12 text-center"
+            className="mb-14 text-center"
           >
             <h2 className="mb-4 text-3xl font-bold lg:text-4xl">
-              Everything your IDE needs
+              Everything you need to ship great products.
             </h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
-              Structured outputs designed for AI coding assistants to understand
-              and implement without confusion.
+              VibeSpecs Pro is the only AI copilot built specifically for vibecoders and their AI IDEs.
             </p>
           </motion.div>
 
@@ -160,13 +171,13 @@ export default function Index() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="card-elevated rounded-xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                className="card-elevated group p-6 transition-all duration-300"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                   {feature.icon}
                 </div>
                 <h3 className="mb-2 text-lg font-semibold">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
@@ -175,10 +186,10 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Output Preview Section */}
-      <section className="border-y border-border bg-secondary/30 py-20 lg:py-32">
+      {/* How It Works Section */}
+      <section className="border-y border-border/50 bg-muted/30 py-20 lg:py-28">
         <div className="container mx-auto px-4">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -186,9 +197,9 @@ export default function Index() {
               transition={{ duration: 0.5 }}
             >
               <h2 className="mb-6 text-3xl font-bold lg:text-4xl">
-                From idea to implementation
+                From idea to implementation in seconds
               </h2>
-              <p className="mb-8 text-muted-foreground">
+              <p className="mb-8 text-lg text-muted-foreground">
                 Every PRD includes structured sections that AI agents understand
                 instantly. No more reformatting or clarifying.
               </p>
@@ -207,13 +218,13 @@ export default function Index() {
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: idx * 0.1 }}
+                    transition={{ duration: 0.3, delay: idx * 0.08 }}
                     className="flex items-center gap-3"
                   >
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                      <Check className="h-4 w-4" />
+                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                      <Check className="h-3.5 w-3.5" />
                     </div>
-                    <span>{item}</span>
+                    <span className="text-foreground">{item}</span>
                   </motion.li>
                 ))}
               </ul>
@@ -224,14 +235,15 @@ export default function Index() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="card-elevated rounded-xl p-6"
+              className="card-elevated overflow-hidden"
             >
-              <div className="mb-4 flex items-center gap-2">
+              <div className="flex items-center gap-2 border-b border-border px-4 py-3">
                 <div className="h-3 w-3 rounded-full bg-destructive/60" />
                 <div className="h-3 w-3 rounded-full bg-primary/40" />
-                <div className="h-3 w-3 rounded-full bg-primary" />
+                <div className="h-3 w-3 rounded-full bg-green-500/60" />
+                <span className="ml-2 text-xs text-muted-foreground">output.json</span>
               </div>
-              <pre className="overflow-x-auto font-mono text-sm">
+              <pre className="overflow-x-auto p-5 font-mono text-sm">
                 <code className="text-muted-foreground">
 {`{
   "feature": "User Authentication",
@@ -256,7 +268,7 @@ export default function Index() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 lg:py-32">
+      <section className="py-20 lg:py-28">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -268,13 +280,13 @@ export default function Index() {
             <h2 className="mb-6 text-3xl font-bold lg:text-4xl">
               Ready to vibe with better specs?
             </h2>
-            <p className="mb-8 text-lg text-muted-foreground">
+            <p className="mb-10 text-lg text-muted-foreground">
               Stop wrestling with prompts. Start shipping features.
             </p>
             <Link to="/generate">
-              <Button variant="hero" size="xl" className="gap-2">
+              <Button size="lg" className="btn-primary h-12 gap-2 rounded-full px-8 text-base">
                 Generate Your First PRD
-                <ArrowRight className="h-5 w-5" />
+                <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </motion.div>
@@ -285,8 +297,10 @@ export default function Index() {
       <footer className="border-t border-border py-8">
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 text-sm text-muted-foreground sm:flex-row">
           <div className="flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-primary" />
-            <span>VibeSpecs Pro</span>
+            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-foreground">
+              <Sparkles className="h-3 w-3 text-background" />
+            </div>
+            <span className="font-medium text-foreground">VibeSpecs Pro</span>
           </div>
           <p>Built for vibecoders who ship fast.</p>
         </div>

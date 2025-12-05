@@ -11,44 +11,46 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 20% 10%;
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 173 80% 40%;
+    --primary: 24 95% 53%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 14% 96%;
-    --secondary-foreground: 220 20% 20%;
+    --secondary-foreground: 222 47% 11%;
 
     --muted: 220 14% 96%;
-    --muted-foreground: 220 10% 46%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 173 80% 94%;
-    --accent-foreground: 173 80% 25%;
+    --accent: 24 100% 95%;
+    --accent-foreground: 24 95% 40%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 173 80% 40%;
+    --ring: 24 95% 53%;
 
     --radius: 0.75rem;
 
-    --gradient-primary: linear-gradient(135deg, hsl(173, 80%, 40%), hsl(190, 80%, 45%));
-    --gradient-subtle: linear-gradient(180deg, hsl(220, 20%, 97%), hsl(220, 14%, 94%));
-    --gradient-card: linear-gradient(145deg, hsl(0, 0%, 100%), hsl(220, 14%, 98%));
+    /* Warm gradient inspired by ChatPRD */
+    --gradient-hero: linear-gradient(135deg, hsl(24, 95%, 53%) 0%, hsl(340, 82%, 52%) 50%, hsl(280, 70%, 50%) 100%);
+    --gradient-text: linear-gradient(90deg, hsl(24, 95%, 53%), hsl(340, 82%, 52%));
+    --gradient-subtle: linear-gradient(180deg, hsl(0, 0%, 100%), hsl(220, 14%, 98%));
+    --gradient-card: linear-gradient(145deg, hsl(0, 0%, 100%), hsl(220, 14%, 99%));
 
     --shadow-sm: 0 1px 2px 0 hsl(220 20% 10% / 0.03);
-    --shadow-md: 0 4px 6px -1px hsl(220 20% 10% / 0.05), 0 2px 4px -2px hsl(220 20% 10% / 0.05);
-    --shadow-lg: 0 10px 15px -3px hsl(220 20% 10% / 0.08), 0 4px 6px -4px hsl(220 20% 10% / 0.05);
-    --shadow-glow: 0 0 40px hsl(173 80% 40% / 0.15);
+    --shadow-md: 0 4px 6px -1px hsl(220 20% 10% / 0.07), 0 2px 4px -2px hsl(220 20% 10% / 0.05);
+    --shadow-lg: 0 10px 25px -5px hsl(220 20% 10% / 0.1), 0 8px 10px -6px hsl(220 20% 10% / 0.05);
+    --shadow-xl: 0 20px 40px -10px hsl(220 20% 10% / 0.15);
 
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
@@ -64,7 +66,7 @@
     --popover: 222 47% 8%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 173 80% 45%;
+    --primary: 24 95% 58%;
     --primary-foreground: 222 47% 6%;
 
     --secondary: 222 30% 14%;
@@ -73,24 +75,25 @@
     --muted: 222 30% 14%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 173 60% 15%;
-    --accent-foreground: 173 80% 70%;
+    --accent: 24 60% 15%;
+    --accent-foreground: 24 95% 70%;
 
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 222 30% 18%;
     --input: 222 30% 18%;
-    --ring: 173 80% 45%;
+    --ring: 24 95% 58%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(173, 80%, 45%), hsl(190, 80%, 50%));
+    --gradient-hero: linear-gradient(135deg, hsl(24, 95%, 58%) 0%, hsl(340, 82%, 52%) 50%, hsl(280, 70%, 55%) 100%);
+    --gradient-text: linear-gradient(90deg, hsl(24, 95%, 58%), hsl(340, 82%, 57%));
     --gradient-subtle: linear-gradient(180deg, hsl(222, 47%, 6%), hsl(222, 47%, 8%));
     --gradient-card: linear-gradient(145deg, hsl(222, 47%, 10%), hsl(222, 47%, 8%));
 
     --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.2);
     --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -2px hsl(0 0% 0% / 0.2);
     --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.4), 0 4px 6px -4px hsl(0 0% 0% / 0.3);
-    --shadow-glow: 0 0 60px hsl(173 80% 45% / 0.2);
+    --shadow-xl: 0 20px 40px -10px hsl(0 0% 0% / 0.5);
   }
 }
 
@@ -116,22 +119,54 @@
 @layer components {
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-primary);
+    background-image: var(--gradient-text);
   }
 
   .card-glass {
-    @apply bg-card/80 backdrop-blur-xl border border-border/50;
-    box-shadow: var(--shadow-md);
-  }
-
-  .card-elevated {
-    @apply bg-card border border-border;
-    background-image: var(--gradient-card);
+    @apply bg-card/90 backdrop-blur-xl border border-border/50 rounded-2xl;
     box-shadow: var(--shadow-lg);
   }
 
-  .glow-primary {
-    box-shadow: var(--shadow-glow);
+  .card-elevated {
+    @apply bg-card border border-border rounded-2xl;
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-elevated:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .hero-section {
+    background: linear-gradient(
+      180deg,
+      hsl(340, 50%, 95%) 0%,
+      hsl(24, 60%, 95%) 30%,
+      hsl(280, 40%, 95%) 60%,
+      hsl(0, 0%, 100%) 100%
+    );
+  }
+
+  .dark .hero-section {
+    background: linear-gradient(
+      180deg,
+      hsl(340, 30%, 10%) 0%,
+      hsl(24, 40%, 8%) 30%,
+      hsl(280, 30%, 8%) 60%,
+      hsl(222, 47%, 6%) 100%
+    );
+  }
+
+  .btn-primary {
+    @apply bg-foreground text-background hover:bg-foreground/90 font-semibold;
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border-2 border-foreground/20 text-foreground hover:bg-foreground/5 font-medium;
   }
 
   .input-focus {
@@ -139,8 +174,17 @@
   }
 
   .input-focus:focus {
-    @apply ring-2 ring-ring/50 border-primary/50;
-    box-shadow: var(--shadow-glow);
+    @apply ring-2 ring-ring/30 border-primary/50;
+    box-shadow: 0 0 0 4px hsl(var(--primary) / 0.1);
+  }
+
+  .badge-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .section-divider {
+    @apply border-t border-border/50;
   }
 }
 

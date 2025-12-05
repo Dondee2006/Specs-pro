@@ -17,12 +17,12 @@ export function PRDCard({ title, icon, children, className, delay = 0 }: PRDCard
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay }}
       className={cn(
-        "card-elevated rounded-xl p-6 transition-all duration-300 hover:shadow-xl",
+        "card-elevated p-6 transition-all duration-300",
         className
       )}
     >
       <div className="mb-4 flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
           {icon}
         </div>
         <h3 className="text-lg font-semibold">{title}</h3>

@@ -48,7 +48,6 @@ export default function Generate() {
     }
 
     setIsGenerating(true);
-    // Simulate AI processing
     await new Promise((resolve) => setTimeout(resolve, 1500));
     const generatedPRD = generateSamplePRD(idea);
     setPrd(generatedPRD);
@@ -57,7 +56,7 @@ export default function Generate() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-muted/30">
       <Navbar />
 
       <main className="container mx-auto px-4 pt-24 pb-16">
@@ -76,7 +75,7 @@ export default function Generate() {
             </p>
           </div>
 
-          <div className="card-elevated rounded-xl p-6">
+          <div className="card-elevated p-6">
             <Textarea
               placeholder="Describe your app idea here... For example: 'A task management app for remote teams with real-time collaboration, Kanban boards, and Slack integration.'"
               value={idea}
@@ -91,26 +90,25 @@ export default function Generate() {
                   checked={advancedMode}
                   onCheckedChange={setAdvancedMode}
                 />
-                <Label htmlFor="advanced-mode" className="cursor-pointer">
+                <Label htmlFor="advanced-mode" className="cursor-pointer text-sm">
                   Advanced Dev PRD
                 </Label>
               </div>
 
               <Button
-                variant="hero"
                 size="lg"
                 onClick={handleGenerate}
                 disabled={isGenerating}
-                className="gap-2"
+                className="btn-primary gap-2 rounded-full px-8"
               >
                 {isGenerating ? (
                   <>
-                    <Loader2 className="h-5 w-5 animate-spin" />
+                    <Loader2 className="h-4 w-4 animate-spin" />
                     Generating...
                   </>
                 ) : (
                   <>
-                    <Sparkles className="h-5 w-5" />
+                    <Sparkles className="h-4 w-4" />
                     Generate PRD
                   </>
                 )}
@@ -127,7 +125,7 @@ export default function Generate() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="mt-12 space-y-12"
+              className="mt-12 space-y-8"
             >
               {/* Export Buttons */}
               <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
@@ -146,7 +144,7 @@ export default function Generate() {
                 icon={<FileText className="h-5 w-5" />}
                 delay={0}
               >
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="grid gap-6 sm:grid-cols-2">
                   <div className="flex items-start gap-3">
                     <Target className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                     <div>
@@ -205,7 +203,7 @@ export default function Generate() {
               {/* 2. Core Features */}
               <div>
                 <div className="mb-4 flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                     <Layers className="h-5 w-5" />
                   </div>
                   <h3 className="text-lg font-semibold">Core Features</h3>
@@ -225,24 +223,24 @@ export default function Generate() {
               >
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   <div>
-                    <span className="text-xs font-medium uppercase tracking-wide">
+                    <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                       Tech Stack
                     </span>
                     <ul className="mt-2 space-y-1">
                       {prd.systemRequirements.techStack.map((t) => (
-                        <li key={t} className="font-mono text-foreground">
+                        <li key={t} className="font-mono text-sm text-foreground">
                           {t}
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <span className="text-xs font-medium uppercase tracking-wide">
+                    <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                       Libraries
                     </span>
                     <ul className="mt-2 space-y-1">
                       {prd.systemRequirements.libraries.map((l) => (
-                        <li key={l} className="font-mono text-foreground">
+                        <li key={l} className="font-mono text-sm text-foreground">
                           {l}
                         </li>
                       ))}
@@ -250,7 +248,7 @@ export default function Generate() {
                   </div>
                   <div className="space-y-4">
                     <div>
-                      <span className="text-xs font-medium uppercase tracking-wide">
+                      <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                         Authentication
                       </span>
                       <p className="mt-1 text-foreground">
@@ -258,7 +256,7 @@ export default function Generate() {
                       </p>
                     </div>
                     <div>
-                      <span className="text-xs font-medium uppercase tracking-wide">
+                      <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                         Database
                       </span>
                       <p className="mt-1 text-foreground">
@@ -266,7 +264,7 @@ export default function Generate() {
                       </p>
                     </div>
                     <div>
-                      <span className="text-xs font-medium uppercase tracking-wide">
+                      <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                         Deployment
                       </span>
                       <p className="mt-1 text-foreground">
@@ -280,7 +278,7 @@ export default function Generate() {
               {/* 4. Data Models */}
               <div>
                 <div className="mb-4 flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                     <Database className="h-5 w-5" />
                   </div>
                   <h3 className="text-lg font-semibold">Data Models</h3>
@@ -291,7 +289,7 @@ export default function Generate() {
               {/* 5. User Flow */}
               <div>
                 <div className="mb-4 flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                     <GitBranch className="h-5 w-5" />
                   </div>
                   <h3 className="text-lg font-semibold">User Flow</h3>
@@ -307,12 +305,12 @@ export default function Generate() {
               >
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                   <div>
-                    <span className="mb-2 inline-block rounded bg-primary/10 px-2 py-1 text-xs font-semibold text-primary">
+                    <span className="mb-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
                       Must Have
                     </span>
                     <ul className="space-y-2">
                       {prd.mvpScope.must.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-foreground">
+                        <li key={item} className="flex items-start gap-2 text-sm text-foreground">
                           <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                           {item}
                         </li>
@@ -320,38 +318,38 @@ export default function Generate() {
                     </ul>
                   </div>
                   <div>
-                    <span className="mb-2 inline-block rounded bg-accent px-2 py-1 text-xs font-semibold text-accent-foreground">
+                    <span className="mb-3 inline-block rounded-full bg-blue-500/10 px-3 py-1 text-xs font-semibold text-blue-600">
                       Should Have
                     </span>
                     <ul className="space-y-2">
                       {prd.mvpScope.should.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-foreground">
-                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-foreground/50" />
+                        <li key={item} className="flex items-start gap-2 text-sm text-foreground">
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
                           {item}
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <span className="mb-2 inline-block rounded bg-secondary px-2 py-1 text-xs font-semibold text-secondary-foreground">
+                    <span className="mb-3 inline-block rounded-full bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-600">
                       Could Have
                     </span>
                     <ul className="space-y-2">
                       {prd.mvpScope.could.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-foreground">
-                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary-foreground/30" />
+                        <li key={item} className="flex items-start gap-2 text-sm text-foreground">
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
                           {item}
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <span className="mb-2 inline-block rounded bg-muted px-2 py-1 text-xs font-semibold text-muted-foreground">
+                    <span className="mb-3 inline-block rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground">
                       Won't Have
                     </span>
                     <ul className="space-y-2">
                       {prd.mvpScope.wont.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-muted-foreground">
+                        <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
                           <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground/30" />
                           {item}
                         </li>
@@ -364,7 +362,7 @@ export default function Generate() {
               {/* 7. Developer Prompts */}
               <div>
                 <div className="mb-4 flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                     <Code className="h-5 w-5" />
                   </div>
                   <h3 className="text-lg font-semibold">Developer-Ready Prompts</h3>

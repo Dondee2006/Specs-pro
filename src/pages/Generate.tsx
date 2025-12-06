@@ -12,12 +12,12 @@ import { CodeBlock } from "@/components/prd/CodeBlock";
 import { FlowDiagram } from "@/components/prd/FlowDiagram";
 import { ExportButtons } from "@/components/prd/ExportButtons";
 import {
-  generateSamplePRD,
   generateCursorPrompt,
   generateReplitSteps,
   generateMarkdown,
   type PRDData,
 } from "@/lib/prdGenerator";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Sparkles,
   FileText,
@@ -48,11 +48,33 @@ export default function Generate() {
     }
 
     setIsGenerating(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    const generatedPRD = generateSamplePRD(idea);
-    setPrd(generatedPRD);
-    setIsGenerating(false);
-    toast.success("PRD generated successfully!");
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('generate-prd', {
+        body: { idea, advancedMode }
+      });
+
+      if (error) {
+        console.error('Error generating PRD:', error);
+        toast.error(error.message || 'Failed to generate PRD');
+        return;
+      }
+
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
+
+      if (data?.prd) {
+        setPrd(data.prd);
+        toast.success("PRD generated successfully!");
+      }
+    } catch (err) {
+      console.error('Unexpected error:', err);
+      toast.error('An unexpected error occurred. Please try again.');
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   return (

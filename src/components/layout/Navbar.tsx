@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Sparkles, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -10,8 +11,8 @@ export function Navbar() {
 
   const navLinks = [
     { name: "Product", href: "/" },
-    { name: "Pricing", href: "#" },
-    { name: "Resources", href: "#" },
+    { name: "Pricing", href: "/pricing" },
+    { name: "Company", href: "/company" },
   ];
 
   return (
@@ -40,6 +41,7 @@ export function Navbar() {
 
         {/* CTA Buttons */}
         <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
           <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
             Login
           </Button>

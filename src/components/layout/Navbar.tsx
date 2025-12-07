@@ -1,13 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Menu, X } from "lucide-react";
+import { Sparkles, Menu, X, LogOut } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useAuth } from "@/hooks/useAuth";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { user, signOut } = useAuth();
 
   const navLinks = [
     { name: "Product", href: "/" },
@@ -42,14 +44,33 @@ export function Navbar() {
         {/* CTA Buttons */}
         <div className="hidden items-center gap-3 md:flex">
           <ThemeToggle />
-          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-            Login
-          </Button>
-          <Link to="/generate">
-            <Button size="sm" className="btn-primary rounded-full px-5">
-              Sign Up
-            </Button>
-          </Link>
+          {user ? (
+            <>
+              <span className="text-sm text-muted-foreground">{user.email}</span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={signOut}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <LogOut className="h-4 w-4 mr-1" />
+                Sign out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link to="/auth">
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+                  Login
+                </Button>
+              </Link>
+              <Link to="/auth">
+                <Button size="sm" className="btn-primary rounded-full px-5">
+                  Sign Up
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -82,14 +103,35 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="flex flex-col gap-2 pt-4 border-t border-border">
-                <Button variant="ghost" size="sm">
-                  Login
-                </Button>
-                <Link to="/generate" onClick={() => setMobileMenuOpen(false)}>
-                  <Button size="sm" className="btn-primary w-full rounded-full">
-                    Sign Up
-                  </Button>
-                </Link>
+                {user ? (
+                  <>
+                    <span className="text-sm text-muted-foreground px-2">{user.email}</span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        signOut();
+                        setMobileMenuOpen(false);
+                      }}
+                    >
+                      <LogOut className="h-4 w-4 mr-1" />
+                      Sign out
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/auth" onClick={() => setMobileMenuOpen(false)}>
+                      <Button variant="ghost" size="sm" className="w-full">
+                        Login
+                      </Button>
+                    </Link>
+                    <Link to="/auth" onClick={() => setMobileMenuOpen(false)}>
+                      <Button size="sm" className="btn-primary w-full rounded-full">
+                        Sign Up
+                      </Button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>

@@ -35,6 +35,74 @@ export type Database = {
         }
         Relationships: []
       }
+      projects: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      saved_prds: {
+        Row: {
+          created_at: string
+          id: string
+          prd_content: Json
+          project_id: string | null
+          title: string
+          updated_at: string
+          user_id: string
+          user_input: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          prd_content: Json
+          project_id?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+          user_input: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          prd_content?: Json
+          project_id?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+          user_input?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saved_prds_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

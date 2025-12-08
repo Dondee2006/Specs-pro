@@ -14,6 +14,7 @@ interface Message {
   type: "user" | "assistant";
   content: string;
   prd?: PRDData;
+  userInput?: string;
 }
 
 export default function Generate() {
@@ -64,6 +65,7 @@ export default function Generate() {
           type: "assistant",
           content: "Here's your PRD based on your idea:",
           prd: data.prd,
+          userInput: idea,
         };
         setMessages((prev) => [...prev, assistantMessage]);
         toast.success("PRD generated successfully!");
@@ -99,7 +101,7 @@ export default function Generate() {
                       type={message.type}
                       content={
                         message.prd ? (
-                          <PRDResponse prd={message.prd} />
+                          <PRDResponse prd={message.prd} userInput={message.userInput} />
                         ) : (
                           <p>{message.content}</p>
                         )

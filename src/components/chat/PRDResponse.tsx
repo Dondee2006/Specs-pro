@@ -1,10 +1,10 @@
-import { motion } from "framer-motion";
 import { PRDCard } from "@/components/prd/PRDCard";
 import { FeatureCard } from "@/components/prd/FeatureCard";
 import { DataModelTable } from "@/components/prd/DataModelTable";
 import { CodeBlock } from "@/components/prd/CodeBlock";
 import { FlowDiagram } from "@/components/prd/FlowDiagram";
 import { ExportButtons } from "@/components/prd/ExportButtons";
+import { SavePRDButton } from "@/components/prd/SavePRDButton";
 import {
   generateCursorPrompt,
   generateReplitSteps,
@@ -27,22 +27,30 @@ import {
 
 interface PRDResponseProps {
   prd: PRDData;
+  userInput?: string;
 }
 
-export function PRDResponse({ prd }: PRDResponseProps) {
+export function PRDResponse({ prd, userInput = "" }: PRDResponseProps) {
   return (
     <div className="space-y-6">
-      {/* Export Buttons */}
+      {/* Export & Save Buttons */}
       <div className="flex items-center justify-between">
         <span className="text-sm font-medium text-muted-foreground">
           Your PRD is ready
         </span>
-        <ExportButtons
-          prdData={prd}
-          cursorPrompt={generateCursorPrompt(prd)}
-          replitSteps={generateReplitSteps(prd)}
-          markdownContent={generateMarkdown(prd)}
-        />
+        <div className="flex items-center gap-2">
+          <SavePRDButton
+            prd={prd}
+            userInput={userInput}
+            defaultTitle={prd.projectSummary.whatUserWants.slice(0, 50)}
+          />
+          <ExportButtons
+            prdData={prd}
+            cursorPrompt={generateCursorPrompt(prd)}
+            replitSteps={generateReplitSteps(prd)}
+            markdownContent={generateMarkdown(prd)}
+          />
+        </div>
       </div>
 
       {/* 1. Project Summary */}

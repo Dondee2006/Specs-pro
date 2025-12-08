@@ -15,6 +15,7 @@ export function Navbar() {
     { name: "Product", href: "/" },
     { name: "Pricing", href: "/pricing" },
     { name: "Company", href: "/company" },
+    ...(user ? [{ name: "My Projects", href: "/projects" }] : []),
   ];
 
   return (
